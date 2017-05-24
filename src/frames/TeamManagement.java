@@ -1,5 +1,6 @@
 package frames;
 
+import Objects.Team;
 import consts.LoginInfo;
 import panels.CodeSubmitPanel;
 import panels.GamesPanel;
@@ -11,19 +12,20 @@ import java.awt.event.ActionEvent;
 
 public class TeamManagement extends JFrame {
 
-    private JPanel pnlButtons, pnlTeamProfile, pnlGames;
-    private JTabbedPane tbpCodeSubmit;
+    private JPanel pnlButtons, pnlTeamProfile;
+    private JTabbedPane tbpCodeSubmit, tbpGames;
+    private Team team;
 
-    public TeamManagement() {
+    public TeamManagement(Team team) {
+        this.team = team;
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         createButtons();
-        pnlTeamProfile = new TeamProfilePanel();
-        tbpCodeSubmit = new CodeSubmitPanel(this);
-        pnlGames = new GamesPanel();
+        pnlTeamProfile = new TeamProfilePanel(team);
+        tbpCodeSubmit = new CodeSubmitPanel(this, team);
+        tbpGames = new GamesPanel(team);
         setPanel(pnlTeamProfile);
-
 
         setTitle("UIAI2017 Team Management");
         setResizable(false);
@@ -51,7 +53,7 @@ public class TeamManagement extends JFrame {
         });
 
         btnGames.addActionListener((ActionEvent e) -> {
-            setPanel(pnlGames);
+            setPanel(tbpGames);
         });
 
         btnSignOut.addActionListener((ActionEvent e) -> {

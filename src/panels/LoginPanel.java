@@ -1,5 +1,6 @@
 package panels;
 
+import Objects.Team;
 import consts.LoginInfo;
 import frames.TeamManagement;
 
@@ -46,7 +47,8 @@ public class LoginPanel extends JPanel {
             // TODO: 2017-05-24 Write login
             LoginInfo.username = txtTeamName.getText();
             LoginInfo.password = new String(txtPassword.getPassword());
-            new TeamManagement();
+
+            new TeamManagement(new Team());
             parent.setVisible(false);
         });
 
