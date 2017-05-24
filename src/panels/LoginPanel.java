@@ -1,5 +1,6 @@
 package panels;
 
+import consts.LoginInfo;
 import frames.TeamManagement;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ public class LoginPanel extends JPanel {
     private JTextField txtTeamName;
     private JPasswordField txtPassword;
 
-    public LoginPanel() {
+    public LoginPanel(JFrame parent, String username, String password) {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         JPanel pnlLogin = new JPanel(new GridLayout(3, 1, 10, 10));
@@ -23,9 +24,10 @@ public class LoginPanel extends JPanel {
         JLabel lblPassword = new JLabel("   Password:");
         JButton btnLogin = new JButton("Sign in");
         JButton btnSignUp = new JButton("Sign up");
-        txtTeamName = new JTextField(10);
+        txtTeamName = new JTextField(username, 10);
         txtTeamName.setHorizontalAlignment(JTextField.CENTER);
-        txtPassword = new JPasswordField(10);
+        txtTeamName.requestFocus();
+        txtPassword = new JPasswordField(password, 10);
         txtPassword.setHorizontalAlignment(JTextField.CENTER);
         txtPassword.setEchoChar('*');
         pnlTeamName.add(lblTeamName, BorderLayout.WEST);
@@ -37,10 +39,15 @@ public class LoginPanel extends JPanel {
         pnlLogin.add(pnlTeamName);
         pnlLogin.add(pnlPassword);
         pnlLogin.add(pnlButtons);
+        parent.getRootPane().setDefaultButton(btnLogin);
         add(pnlLogin);
 
         btnLogin.addActionListener((ActionEvent e) -> {
+            // TODO: 2017-05-24 Write login
+            LoginInfo.username = txtTeamName.getText();
+            LoginInfo.password = new String(txtPassword.getPassword());
             new TeamManagement();
+            parent.setVisible(false);
         });
 
         btnSignUp.addActionListener((ActionEvent e) -> {

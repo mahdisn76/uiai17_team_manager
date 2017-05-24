@@ -1,6 +1,9 @@
 package frames;
 
-import panels.CodeUpload;
+import consts.LoginInfo;
+import panels.CodeSubmitPanel;
+import panels.GamesPanel;
+import panels.TeamProfilePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,19 +11,27 @@ import java.awt.event.ActionEvent;
 
 public class TeamManagement extends JFrame {
 
-    private JPanel pnlButtons;
+    private JPanel pnlButtons, pnlTeamProfile, pnlGames;
+    private JTabbedPane tbpCodeSubmit;
 
     public TeamManagement() {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        pnlButtons = createButtons();
-        add(pnlButtons, BorderLayout.NORTH);
-        add(new CodeUpload(), BorderLayout.CENTER);
+
+        createButtons();
+        pnlTeamProfile = new TeamProfilePanel();
+        tbpCodeSubmit = new CodeSubmitPanel(this);
+        pnlGames = new GamesPanel();
+        setPanel(pnlTeamProfile);
+
+
         setTitle("UIAI2017 Team Management");
-        pack();
+        setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    private JPanel createButtons() {
+    private void createButtons() {
         JPanel pnlButtons = new JPanel();
         JButton btnTeamProfile = new JButton("Profile");
         JButton btnSubmitCode = new JButton("Submit code");
@@ -31,19 +42,32 @@ public class TeamManagement extends JFrame {
         pnlButtons.add(btnGames);
         pnlButtons.add(btnSignOut);
 
-        JPanel pnlCodeUpload = new CodeUpload();
-
         btnSubmitCode.addActionListener((ActionEvent e) -> {
-            setPanel(pnlCodeUpload);
+            setPanel(tbpCodeSubmit);
         });
 
-        return pnlButtons;
+        btnTeamProfile.addActionListener((ActionEvent e) -> {
+            setPanel(pnlTeamProfile);
+        });
+
+        btnGames.addActionListener((ActionEvent e) -> {
+            setPanel(pnlGames);
+        });
+
+        btnSignOut.addActionListener((ActionEvent e) -> {
+            new LoginWindow(LoginInfo.username, LoginInfo.password);
+            dispose();
+        });
+
+        this.pnlButtons = pnlButtons;
     }
 
-    private void setPanel(JPanel pnl) {
+    private void setPanel(Component pnl) {
         getContentPane().removeAll();
         add(pnlButtons, BorderLayout.NORTH);
         add(pnl, BorderLayout.CENTER);
+        pack();
+        setLocationRelativeTo(null);
         validate();
     }
 
