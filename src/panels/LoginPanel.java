@@ -1,6 +1,6 @@
 package panels;
 
-import Objects.Team;
+import objects.Team;
 import consts.LoginInfo;
 import frames.TeamManagement;
 

@@ -1,6 +1,6 @@
-package panels;
+package panels.codes;
 
-import Objects.Team;
+import objects.Team;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 
 import java.net.URL;
 import java.util.Date;

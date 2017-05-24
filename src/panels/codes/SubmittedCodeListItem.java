@@ -1,6 +1,6 @@
-package panels;
+package panels.codes;
 
-import Objects.Code;
+import objects.Code;
 
 import javax.swing.*;
 import java.awt.*;

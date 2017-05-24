@@ -1,9 +1,9 @@
 package frames;
 
-import Objects.Team;
+import objects.Team;
 import consts.LoginInfo;
-import panels.CodeSubmitPanel;
-import panels.GamesPanel;
+import panels.codes.CodeSubmitPanel;
+import panels.games.GamesPanel;
 import panels.TeamProfilePanel;
 
 import javax.swing.*;
@@ -24,7 +24,7 @@ public class TeamManagement extends JFrame {
         createButtons();
         pnlTeamProfile = new TeamProfilePanel(team);
         tbpCodeSubmit = new CodeSubmitPanel(this, team);
-        tbpGames = new GamesPanel(team);
+        tbpGames = new GamesPanel(this, team);
         setPanel(pnlTeamProfile);
 
         setTitle("UIAI2017 Team Management");
