@@ -13,7 +13,6 @@ enum languages
 }
 
 public class Code {
-
     private URL url;
     private languages lang;
 

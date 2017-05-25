@@ -1,5 +1,7 @@
 package panels.codes;
 
+import objects.Team;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -55,6 +57,8 @@ class CodeUploadTab extends JPanel {
                 btnSelect.setEnabled(false);
                 btnUpload.setEnabled(false);
                 cbxLanguages.setEnabled(false);
+
+                //team.add_code(selectedZip,os,cbxLanguages.getSelectedItem().toString());
             }
         });
 
