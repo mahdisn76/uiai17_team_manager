@@ -1,5 +1,7 @@
 package objects;
 
+import consts.GameRequestStatus;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -7,60 +9,77 @@ import java.util.ArrayList;
  * Created by MSN on 5/24/2017.
  */
 public class Team {
-    private String Team_Name;
-    private ArrayList<String> member_names = new ArrayList<>();
-    private ArrayList<Code> my_Codes = new ArrayList<>();
-    private ArrayList<Game> my_Games = new ArrayList<>();
-    private Code Selected_code;
+    private String name;
+    private ArrayList<String> members;
+    private ArrayList<Code> codes;
+    private ArrayList<Game> games;
+    private Code selected;
 
-    private ArrayList<Game_Request> sent_game_requests = new ArrayList<>();
-    private ArrayList<Game_Request> recieved_game_requests = new ArrayList<>();
+    private ArrayList<GameRequest> sentRequests;
+    private ArrayList<GameRequest> receivedRequests;
 
-
-    public void add_code(File f)
-    {
-        // upload file here. Then add code obj to the my_Codes arraylist
+    public Team(String name, String member1, String member2) {
+        this.name = name;
+        members = new ArrayList<>();
+        members.add(member1);
+        members.add(member2);
+        codes = new ArrayList<>();
+        games = new ArrayList<>();
+        sentRequests = new ArrayList<>();
+        receivedRequests = new ArrayList<>();
     }
 
-    public void send_game_req(String req_team_name)
-    {
+
+    public void addCode(File f) {
+        // upload file here. Then add code obj to the codes arraylist
+    }
+
+    public void sendRequest(String req_team_name) {
         // send request information to the server
         // run a thread that wait for servers answer (when server runs the game, it sends game log)
     }
 
-    public ArrayList<String> getMember_names() {
-        return member_names;
+    public int getPendingCount() {
+        int n = 0;
+        for (GameRequest gr : receivedRequests)
+            if (gr.getStatus() == GameRequestStatus.PENDING)
+                ++n;
+        return n;
     }
 
-    public ArrayList<Game_Request> getSent_game_requests() {
-        return sent_game_requests;
+    public ArrayList<String> getMembers() {
+        return members;
     }
 
-    public ArrayList<Game_Request> getRecieved_game_requests() {
-        return recieved_game_requests;
+    public ArrayList<GameRequest> getSentRequests() {
+        return sentRequests;
     }
 
-    public Code getSelected_code() {
-        return Selected_code;
+    public ArrayList<GameRequest> getReceivedRequests() {
+        return receivedRequests;
     }
 
-    public void setSelected_code(Code selected_code) {
-        Selected_code = selected_code;
+    public Code getSelectedCode() {
+        return selected;
     }
 
-    public String getTeam_Name() {
-        return Team_Name;
+    public void setSelected(Code selected) {
+        this.selected = selected;
     }
 
-    public void setTeam_Name(String team_Name) {
-        Team_Name = team_Name;
+    public String getName() {
+        return name;
     }
 
-    public ArrayList<Code> getMy_Codes() {
-        return my_Codes;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public ArrayList<Game> getMy_Games() {
-        return my_Games;
+    public ArrayList<Code> getCodes() {
+        return codes;
+    }
+
+    public ArrayList<Game> getGames() {
+        return games;
     }
 }

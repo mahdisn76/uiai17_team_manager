@@ -7,38 +7,40 @@ import java.util.Date;
  * Created by MSN on 5/24/2017.
  */
 public class Game {
-    private Date date = new Date();
-    private String OppTeamName;
-    private URL url;
 
-    Game(Date t_date, String t_OppTeamName, URL t_url)
-    {
-        date = t_date;
-        OppTeamName = t_OppTeamName;
-        url = t_url;
+    private String name;
+    private String team1Name, team2Name, winner;
+    private URL logURL;
+
+    public Game(String gameName, String team1Name, String team2Name, String winner) {
+        this.name = gameName;
+        this.team1Name = team1Name;
+        this.team2Name = team2Name;
+        this.winner = winner;
     }
 
-    public Date getDate() {
-        return date;
+    public String getName() {
+        return name;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public String getTeam1Name() {
+        return team1Name;
     }
 
-    public String getOppTeamName() {
-        return OppTeamName;
+    public String getTeam2Name() {
+        return team2Name;
     }
 
-    public void setOppTeamName(String oppTeamName) {
-        OppTeamName = oppTeamName;
+    public URL getLogURL() {
+        return logURL;
     }
 
-    public URL getUrl() {
-        return url;
+    public void setLogURL(URL logURL) {
+        this.logURL = logURL;
     }
 
-    public void setUrl(URL url) {
-        this.url = url;
+    public String getWinnerName() {
+        return winner;
     }
+
 }

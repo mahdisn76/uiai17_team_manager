@@ -48,7 +48,7 @@ public class LoginPanel extends JPanel {
             LoginInfo.username = txtTeamName.getText();
             LoginInfo.password = new String(txtPassword.getPassword());
 
-            new TeamManagement(new Team());
+            new TeamManagement(new Team("TableFlipperZ", "1", "2"));
             parent.setVisible(false);
         });
 

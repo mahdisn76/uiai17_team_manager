@@ -1,10 +1,11 @@
 package frames;
 
-import objects.Team;
 import consts.LoginInfo;
+import objects.Team;
+import panels.TeamProfilePanel;
 import panels.codes.CodeSubmitPanel;
 import panels.games.GamesPanel;
-import panels.TeamProfilePanel;
+import panels.requests.RequestsPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +13,8 @@ import java.awt.event.ActionEvent;
 
 public class TeamManagement extends JFrame {
 
-    private JPanel pnlButtons, pnlTeamProfile;
-    private JTabbedPane tbpCodeSubmit, tbpGames;
+    private JPanel pnlButtons, pnlTeamProfile, pnlGames;
+    private JTabbedPane pnlCodeSubmit, pnlRequests;
     private Team team;
 
     public TeamManagement(Team team) {
@@ -23,13 +24,15 @@ public class TeamManagement extends JFrame {
 
         createButtons();
         pnlTeamProfile = new TeamProfilePanel(team);
-        tbpCodeSubmit = new CodeSubmitPanel(this, team);
-        tbpGames = new GamesPanel(this, team);
+        pack();
         setPanel(pnlTeamProfile);
+        pnlCodeSubmit = new CodeSubmitPanel(this, team);
+        pnlGames = new GamesPanel(this, team);
+        pnlRequests = new RequestsPanel(this, team);
 
         setTitle("UIAI2017 Team Management");
-        setResizable(false);
         setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
     }
 
@@ -37,23 +40,29 @@ public class TeamManagement extends JFrame {
         JPanel pnlButtons = new JPanel();
         JButton btnTeamProfile = new JButton("Profile");
         JButton btnSubmitCode = new JButton("Submit code");
+        JButton btnRequests = new JButton("Requests");
         JButton btnGames = new JButton("Games");
         JButton btnSignOut = new JButton("Sign out");
         pnlButtons.add(btnTeamProfile);
         pnlButtons.add(btnSubmitCode);
+        pnlButtons.add(btnRequests);
         pnlButtons.add(btnGames);
         pnlButtons.add(btnSignOut);
 
         btnSubmitCode.addActionListener((ActionEvent e) -> {
-            setPanel(tbpCodeSubmit);
+            setPanel(pnlCodeSubmit);
         });
 
         btnTeamProfile.addActionListener((ActionEvent e) -> {
             setPanel(pnlTeamProfile);
         });
 
+        btnRequests.addActionListener((ActionEvent e) -> {
+            setPanel(pnlRequests);
+        });
+
         btnGames.addActionListener((ActionEvent e) -> {
-            setPanel(tbpGames);
+            setPanel(pnlGames);
         });
 
         btnSignOut.addActionListener((ActionEvent e) -> {

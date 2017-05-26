@@ -1,6 +1,7 @@
-package panels.games;
+package panels.requests;
 
 import objects.Code;
+import objects.Team;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,10 +11,11 @@ import java.awt.event.MouseListener;
 
 class RequestGameTab extends JPanel {
 
-    RequestGameTab(Code c) {
+    RequestGameTab(Team myTeam) {
         setLayout(new BorderLayout(5, 5));
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
+        Code c = myTeam.getSelectedCode();
         JPanel pnlTexts = new JPanel(new GridLayout(0, 1));
         JLabel lblCodeStatus = new JLabel("Your code:");
         JLabel lblCodeName = new JLabel(c != null ? c.toString() : "No code selected");
@@ -23,7 +25,13 @@ class RequestGameTab extends JPanel {
         pnlTexts.add(lblCodeLang);
         add(pnlTexts, BorderLayout.NORTH);
 
-        JList<String> teams = new JList<>(getTeams());
+        JLabel lblStatus = new JLabel("Getting available teams from server...");
+        add(lblStatus);
+        String[] teamNames = getTeams();
+        remove(lblStatus);
+        JList<String> teams = new JList<>(teamNames);
+        if (c == null)
+            teams.setEnabled(false);
         teams.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         teams.addMouseListener(new MouseListener() {
@@ -57,6 +65,8 @@ class RequestGameTab extends JPanel {
         add(teams, BorderLayout.CENTER);
 
         JButton btnRequest = new JButton("Send Request");
+        if (c == null)
+            btnRequest.setEnabled(false);
         btnRequest.addActionListener((ActionEvent e) -> {
             requestGame(teams.getSelectedValue());
         });
@@ -68,7 +78,7 @@ class RequestGameTab extends JPanel {
         System.out.println(opp);
     }
 
-    private String[] getTeams(){
+    private String[] getTeams() {
         // TODO: 2017-05-24 Get teams list from server
         String[] names = new String[10];
         for (int i = 0; i < 10; i++)
